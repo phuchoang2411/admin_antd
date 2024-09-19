@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Table, Spin, Alert } from 'antd';
-import logo from './logo.svg';
-import './App.css';
+import { Spin, Alert } from 'antd';
+import { fetchProducts } from './api';
+import ProductTable from './ProductTable';
 
 function App() {
   const [data, setData] = useState([]);
@@ -10,31 +9,19 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/products') // Replace with your API endpoint
-      .then((response) => {
-        setData(response.data);
+    const getData = async () => {
+      try {
+        const products = await fetchProducts();
+        setData(products);
         setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error);
         setLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  const columns = [
-    {
-      title: 'Tên sách',
-      dataIndex: 'title',
-      key: 'title',
-    },
-    {
-      title: 'Tác giả',
-      dataIndex: 'author',
-      key: 'author',
-    },
-    // Add more columns as needed
-  ];
+    getData();
+  }, []);
 
   if (loading) {
     return <Spin tip="Loading..." />;
@@ -48,7 +35,10 @@ function App() {
 
   return (
     <div className="App">
-      <Table dataSource={data} columns={columns} rowKey="id" />
+      <header className="App-header">
+        <h1>Product List</h1>
+      </header>
+      <ProductTable data={data} />
     </div>
   );
 }
