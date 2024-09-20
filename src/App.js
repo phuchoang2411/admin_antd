@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Spin, Alert } from 'antd';
 import { fetchProducts } from './api';
 import ProductTable from './ProductTable';
+import ProductDetail from './ProductDetail';
 
 function App() {
   const [data, setData] = useState([]);
@@ -34,12 +36,14 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Product List</h1>
-      </header>
-      <ProductTable data={data} />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/products" element={<ProductTable data={data} />} />
+          <Route path="/product" element={<ProductDetail />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
