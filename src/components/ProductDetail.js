@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Spin, Alert, Descriptions } from 'antd';
-import { fetchProductById } from './api';
+import { fetchProductById } from '../api';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
