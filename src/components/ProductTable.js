@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, Alert, Table, Button, Popconfirm, message } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { fetchProducts /* deleteProduct */ } from '../api';
+import { deleteProductById, fetchProducts } from '../api';
 import { Link } from 'react-router-dom';
 
 const ProductTable = () => {
@@ -26,8 +26,8 @@ const ProductTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      //await deleteProduct(id); // Assuming deleteProduct is an API function
-      //setData(data.filter((item) => item._id !== id));
+      await deleteProductById(id); // Assuming deleteProduct is an API function
+      setData(data.filter((item) => item._id !== id));
       message.success('Product deleted successfully');
     } catch (error) {
       message.error('Failed to delete product');

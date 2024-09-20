@@ -17,3 +17,14 @@ export const fetchProductById = async (id) => {
     throw error;
   }
 };
+
+export const deleteProductById = async (id) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:3001/product?id=${id}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
