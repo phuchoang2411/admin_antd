@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Spin, Alert } from 'antd';
-import { fetchProducts } from '../api';
-import { Table } from 'antd';
+import { Spin, Alert, Table, Button, Popconfirm, message } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
+import { fetchProducts /* deleteProduct */ } from '../api';
 import { Link } from 'react-router-dom';
 
 const ProductTable = () => {
@@ -23,6 +23,16 @@ const ProductTable = () => {
 
     getData();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      //await deleteProduct(id); // Assuming deleteProduct is an API function
+      //setData(data.filter((item) => item._id !== id));
+      message.success('Product deleted successfully');
+    } catch (error) {
+      message.error('Failed to delete product');
+    }
+  };
 
   if (loading) {
     return <Spin tip="Loading..." />;
@@ -48,7 +58,20 @@ const ProductTable = () => {
       dataIndex: 'author',
       key: 'author',
     },
-    // Add more columns as needed
+    {
+      title: 'Thao tác',
+      key: 'delete',
+      render: (text, record) => (
+        <Popconfirm
+          title="Xác nhận xóa sản phẩm này?"
+          onConfirm={() => handleDelete(record._id)}
+          okText="Xác nhận"
+          cancelText="Hủy"
+        >
+          <Button type="link" danger icon={<DeleteOutlined />}></Button>
+        </Popconfirm>
+      ),
+    },
   ];
 
   return <Table dataSource={data} columns={columns} rowKey="_id" />;
