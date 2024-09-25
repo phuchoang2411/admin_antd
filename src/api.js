@@ -28,3 +28,12 @@ export const deleteProductById = async (id) => {
     throw error;
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+    const response = await axios.post('http://localhost:3001/product', product);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
