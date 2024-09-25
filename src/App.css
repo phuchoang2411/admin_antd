@@ -1,0 +1,5 @@
+/* App.css */
+.ant-layout-sider-trigger {
+  background-color: #fff !important; /* Lighter background color */
+  color: #000 !important; /* Darker text color for better contrast */
+}
