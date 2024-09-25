@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import { UnorderedListOutlined } from '@ant-design/icons';
-import ProductTable from './components/ProductTable';
-import ProductDetail from './components/ProductDetail';
-import AddProduct from './components/AddProduct';
-import EditProduct from './components/EditProduct';
+import ProductTable from './components/products/ProductTable';
+import ProductDetail from './components/products/ProductDetail';
+import AddProduct from './components/products/AddProduct';
+import EditProduct from './components/products/EditProduct';
 import './App.css';
 
 const { Sider, Content } = Layout;

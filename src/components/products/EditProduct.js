@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message, Spin } from 'antd';
-import { fetchProductById, updateProduct } from '../api';
+import { fetchProductById, updateProduct } from '../../apis/products';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditProduct = () => {

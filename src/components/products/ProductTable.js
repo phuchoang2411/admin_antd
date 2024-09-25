@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, Alert, Table, Button, Popconfirm, message } from 'antd';
 import { DeleteOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons';
-import { deleteProductById, fetchProducts } from '../api';
+import { deleteProductById, fetchProducts } from '../../apis/products';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ProductTable = () => {
