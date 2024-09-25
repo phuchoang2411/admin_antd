@@ -37,3 +37,15 @@ export const addProduct = async (product) => {
     throw error;
   }
 };
+
+export const updateProduct = async (id, product) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:3001/product?id=${id}`,
+      product
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

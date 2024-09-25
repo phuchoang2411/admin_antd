@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import { addProduct } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
       await addProduct(values);
       message.success('Product added successfully');
+      navigate('/products');
     } catch (error) {
       message.error('Failed to add product');
     } finally {

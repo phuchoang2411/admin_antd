@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, Alert, Table, Button, Popconfirm, message } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons';
 import { deleteProductById, fetchProducts } from '../api';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -60,16 +61,23 @@ const ProductTable = () => {
     },
     {
       title: 'Thao tác',
-      key: 'delete',
+      key: 'action',
       render: (text, record) => (
-        <Popconfirm
-          title="Xác nhận xóa sản phẩm này?"
-          onConfirm={() => handleDelete(record._id)}
-          okText="Xác nhận"
-          cancelText="Hủy"
-        >
-          <Button type="link" danger icon={<DeleteOutlined />}></Button>
-        </Popconfirm>
+        <div>
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => navigate(`/edit-product/${record._id}`)}
+          />
+          <Popconfirm
+            title="Are you sure to delete this product?"
+            onConfirm={() => handleDelete(record._id)}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="link" danger icon={<DeleteOutlined />} />
+          </Popconfirm>
+        </div>
       ),
     },
   ];
