@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, Alert, Table, Button, Popconfirm, message } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { deleteProductById, fetchProducts } from '../api';
 import { Link } from 'react-router-dom';
 
@@ -74,7 +74,18 @@ const ProductTable = () => {
     },
   ];
 
-  return <Table dataSource={data} columns={columns} rowKey="_id" />;
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <Link to="/add-product">
+          <Button type="primary" icon={<PlusOutlined />}>
+            Add Product
+          </Button>
+        </Link>
+      </div>
+      <Table dataSource={data} columns={columns} rowKey="_id" />
+    </div>
+  );
 };
 
 export default ProductTable;
