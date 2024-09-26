@@ -1,8 +1,13 @@
 import axios from 'axios';
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (page = 1, pageSize = 10) => {
   try {
-    const response = await axios.get('http://localhost:3001/products');
+    const response = await axios.get('http://localhost:3001/products', {
+      params: {
+        page,
+        pageSize,
+      },
+    });
     return response.data;
   } catch (error) {
     throw error;
